@@ -1,0 +1,29 @@
+{
+  "name": "server-side",
+  "version": "1.0.0",
+  "description": "This repository contains my homework project for the subject called Server-Side JavaScript, 2021/22/2.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "nodemon index.js",
+    "run": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DaWadjet/server-side-js.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DaWadjet/server-side-js/issues"
+  },
+  "homepage": "https://github.com/DaWadjet/server-side-js#readme",
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
