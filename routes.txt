@@ -1,0 +1,50 @@
+harckocsik és legénységük
+- index.html - harckocsik listája (edit, delete, new, legénység)
+- crew.html - legénység (vissza, edit, delete)
+- tank_edit.html - tank adatainak megadása (new/edit, back, new crew)
+- crew_edit.html -  legénység adatainak megadása (new/edit, back)
+
+routing:
+GET / 
+    getHarckocsikMW * * 
+    renderMW(index.html) * *
+
+GET, POST /harckocsi/new
+ *     saveTankMW --- ha nem érkezett adat postban, nem csinálunk semmit, különben mentünk (újat hozunk létre/felülírunk) és redirect('/') 
+   *   renderMW(tank_edit.html (new))
+        - ne jelenjen meg a legénység hozzáadása gomb
+        - ha volt valami érték beküldve - azzal töldődjön fel a form
+   
+
+GET, POST /harckocsi/edit/:harckocsiid
+   * getHarkocsiMW (paraméter alapján kiszedi az adatbázisból, ha nincs, redirect('/'))
+   * saveTankMW
+   * renderMW(tank_edit.html (edit))
+        - ha volt valami érték beküldve - azzal töldődjön fel a form
+
+
+GET /harckocsi/delete/:harckocsiid - törlés
+   * getHarckocsiMW
+   * delHarkocsiMW - törlés és redirect('/')
+
+
+GET /legenyseg/:harckocsiid
+   * getHarckocsiMW
+   * getLegenysegMW -- harckocsiid és legegnysegid alapjánkikeresi a legénységet (paraméter nélkül mindegyiket, amelyik a harckocsihoz tartozik)
+    render(crew.html)
+
+GET, POST /legenyseg/:harckocsiid/:legenysegid 
+  *  getHarckocsiMW
+  *  getLegenysegMW
+   * saveLegenysegMW (update, majd redirect('/legenyseg/:harckocsiid))
+   * render(crew_edit.html)
+
+GET /legegnyseg/:harckocsiid/delete/:legenysegid
+  *  getLegenysegMW
+   * delLegenysegMW - törlés + redirect('/legenyseg/:harkocsiid')
+
+
+GET,POST /legenyseg/:harckocsiid/new
+  *  addLegenysegMW --- ha nem érkezett adat postban, nem csinálunk semmit, különben újat hozunk létre és redirect('/legenyseg/:harckocsiid') 
+   * renderMW(crew_edit.html (new))
+        - ha volt valami érték beküldve - azzal töldődjön fel a form
